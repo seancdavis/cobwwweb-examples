@@ -4,6 +4,7 @@ function initChart() {
   $.get('./sg-wayfinder-chart-02.svg', function(data, statusText, event) {
     $('#chart-container').html(data.documentElement);
     renderScore();
+    renderBase64Image()
   });
 }
 
@@ -34,4 +35,25 @@ function describeArc(x, y, radius, startAngle, endAngle) {
   ].join(" ");
 
   return d;
+}
+
+function renderBase64Image() {
+  var chartCanvas = document.getElementById('chart-canvas');
+  var ctxt = chartCanvas.getContext("2d");
+
+  drawInlineSVG(ctxt, function() {
+    var imgSrc = chartCanvas.toDataURL();
+    $('#chart-image').attr('src', imgSrc);
+  });
+}
+
+function drawInlineSVG(ctx, callback) {
+  var svg = $('#chart-container').find('svg').first()[0];
+  var svgURL = new XMLSerializer().serializeToString(svg);
+  var img = new Image();
+  img.onload = function() {
+    ctx.drawImage(this, 0, 0);
+    callback();
+  }
+  img.src = 'data:image/svg+xml; charset=utf8, ' + encodeURIComponent(svgURL);
 }
