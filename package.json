@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "svg2png": "^4.1.1"
+  }
+}
