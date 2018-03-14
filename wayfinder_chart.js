@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 const fs = require('pn/fs');
-// const svg2png = require('svg2png');
-// const axios = require('axios');
+const svg2png = require('svg2png');
+const axios = require('axios');
 const cheerio = require('cheerio');
 
-const svgTemplateUrl = './assets/sg-wayfinder-chart-blank.svg';
+const svgTemplateUrl = 'https://crossroads-assets.s3.amazonaws.com/tmp/sg-wayfinder-chart-blank.svg';
 const wayfinderScore = 232;
 
 // const inputFile = 'assets/sg-wayfinder-chart.svg';
@@ -29,35 +29,30 @@ class WayfinderChart {
   }
 
   process() {
-    this.getSvgTemplate(_$ => {
+    this.getSvgTemplate().then(_$ => {
       this.drawScore();
+      console.log(this.$.html());
       // this.writeSvgToFile();
-      // this.convertToBase64();
     });
-    // .then(_$ => {
-    //   // this.drawScore();
-    //   // this.writeSvgToFile();
-    // });
   }
 
   getSvgTemplate(callback) {
-    // console.log(fs.readFile(svgTemplateUrl).toString('base64'));
-    fs.readFile(svgTemplateUrl, 'utf8', (err, data) => {
-      // console.log(data.toString('base64'));
-      // console.log(new Buffer(data.toString(), 'base64'));
-      console.log(Buffer.from(data.toString()).toString('base64'));
+    // // console.log(fs.readFile(svgTemplateUrl).toString('base64'));
+    // fs.readFile(svgTemplateUrl, 'utf8', (err, data) => {
+    //   // console.log(data.toString('base64'));
+    //   // console.log(new Buffer(data.toString(), 'base64'));
+    //   console.log(Buffer.from(data.toString()).toString('base64'));
 
-      // this.$ = cheerio.load(data.toString());
-      // callback(this.$);
-    });
-    // --- IF WE'RE GETTING THE SVG FROM A REMOTE FILE
-    // return axios.get(svgTemplateUrl).then(response => {
-    //   // this.svg = response.data;
-    //   // return this.svg;
-    //   return this.$ = cheerio.load(response.data);
-    // }).catch(function (error) {
-    //   console.error(error);
+    //   // this.$ = cheerio.load(data.toString());
+    //   // callback(this.$);
     // });
+    return axios.get(svgTemplateUrl).then(response => {
+      // this.svg = response.data;
+      // return this.svg;
+      return this.$ = cheerio.load(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    });
   }
 
   drawScore() {
@@ -65,14 +60,14 @@ class WayfinderChart {
     this.$('#chart-foreground').attr('d', this.describeArc(211, 210.5, 180, 0, 211));
   }
 
-  writeSvgToFile() {
-    const outputFile = `./assets/sg-wayfinder-result-${wayfinderScore}.svg`;
-    fs.writeFile(outputFile, this.$.html(), function(err) {
-      if (err) {
-        return console.error(err);
-      }
-    });
-  }
+  // writeSvgToFile() {
+  //   const outputFile = `./assets/sg-wayfinder-result-${wayfinderScore}.svg`;
+  //   fs.writeFile(outputFile, this.$.html(), function(err) {
+  //     if (err) {
+  //       return console.error(err);
+  //     }
+  //   });
+  // }
 
   convertToBase64() {
     console.log('CONVERT');
