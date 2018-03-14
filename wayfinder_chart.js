@@ -5,24 +5,25 @@ const svg2png = require('svg2png');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-const svgTemplateUrl = 'https://crossroads-assets.s3.amazonaws.com/tmp/sg-wayfinder-chart-blank.svg';
-const wayfinderScore = 106;
-
 class WayfinderChart {
 
   constructor() {
     this.$ = null;
+    this.svgTemplateUrl = 'https://crossroads-assets.s3.amazonaws.com/tmp/sg-wayfinder-chart-blank.svg';
   }
 
-  process() {
-    this.getSvgTemplate().then(_$ => {
-      this.drawScore();
-      this.getBase64().then(base64 => console.log(base64));
+  process(wayfinderScore = 0) {
+    this.wayfinderScore = wayfinderScore;
+    return new Promise((resolve, reject) => {
+      this.getSvgTemplate().then(_$ => {
+        this.drawScore();
+        this.getBase64().then(base64 => resolve(base64));
+      });
     });
   }
 
   getSvgTemplate(callback) {
-    return axios.get(svgTemplateUrl).then(response => {
+    return axios.get(this.svgTemplateUrl).then(response => {
       return this.$ = cheerio.load(response.data);
     }).catch(function (error) {
       console.error(error);
@@ -31,7 +32,7 @@ class WayfinderChart {
 
   drawScore() {
     this.$('#chart-background').attr('d', this.describeArc(211, 210.5, 180, 0, 359.999));
-    this.$('#chart-foreground').attr('d', this.describeArc(211, 210.5, 180, 0, wayfinderScore));
+    this.$('#chart-foreground').attr('d', this.describeArc(211, 210.5, 180, 0, this.wayfinderScore));
   }
 
   getBase64() {
@@ -58,8 +59,12 @@ class WayfinderChart {
       'A', radius, radius, 0, largeArcFlag, 0, end.x, end.y
     ].join(' ');
   }
-
 }
 
 const wayfinderChart = new WayfinderChart();
-wayfinderChart.process();
+
+// Pass a number between [0 - 359] and you will be returned a promise, from
+// which the base64 string is resolved.
+wayfinderChart.process(222).then(base64 => {
+  console.log(base64);
+});
