@@ -10,7 +10,7 @@ function initChart() {
 
 function renderScore() {
   $('#chart-background').attr('d', describeArc(211, 210.5, 180, 0, 359.999));
-  $('#chart-foreground').attr('d', describeArc(211, 210.5, 180, 0, 211));
+  $('#chart-foreground').attr('d', describeArc(211, 210.5, 180, 0, 104));
 }
 
 function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
@@ -43,6 +43,7 @@ function renderBase64Image() {
 
   drawInlineSVG(ctxt, function() {
     var imgSrc = chartCanvas.toDataURL();
+    $('body').append(imgSrc + '<br><br>');
     $('#chart-image').attr('src', imgSrc);
   });
 }
