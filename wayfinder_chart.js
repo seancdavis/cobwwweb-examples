@@ -6,49 +6,23 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 const svgTemplateUrl = 'https://crossroads-assets.s3.amazonaws.com/tmp/sg-wayfinder-chart-blank.svg';
-const wayfinderScore = 232;
-
-// const inputFile = 'assets/sg-wayfinder-chart.svg';
-// const outputFile = 'assets/sg-wayfinder-chart.png';
-
-// fs.unlink(outputFile, function(error) {
-//   if (error) { throw error; }
-//   console.log(`Deleted File: ${outputFile}`);
-// });
-
-// fs.readFile(inputFile)
-//     .then(svg2png)
-//     .then(buffer => fs.writeFile(outputFile, buffer))
-//     .catch(e => console.error(e));
+const wayfinderScore = 106;
 
 class WayfinderChart {
 
   constructor() {
-    // this.svg = null;
     this.$ = null;
   }
 
   process() {
     this.getSvgTemplate().then(_$ => {
       this.drawScore();
-      console.log(this.$.html());
-      // this.writeSvgToFile();
+      this.getBase64().then(base64 => console.log(base64));
     });
   }
 
   getSvgTemplate(callback) {
-    // // console.log(fs.readFile(svgTemplateUrl).toString('base64'));
-    // fs.readFile(svgTemplateUrl, 'utf8', (err, data) => {
-    //   // console.log(data.toString('base64'));
-    //   // console.log(new Buffer(data.toString(), 'base64'));
-    //   console.log(Buffer.from(data.toString()).toString('base64'));
-
-    //   // this.$ = cheerio.load(data.toString());
-    //   // callback(this.$);
-    // });
     return axios.get(svgTemplateUrl).then(response => {
-      // this.svg = response.data;
-      // return this.svg;
       return this.$ = cheerio.load(response.data);
     }).catch(function (error) {
       console.error(error);
@@ -57,20 +31,14 @@ class WayfinderChart {
 
   drawScore() {
     this.$('#chart-background').attr('d', this.describeArc(211, 210.5, 180, 0, 359.999));
-    this.$('#chart-foreground').attr('d', this.describeArc(211, 210.5, 180, 0, 211));
+    this.$('#chart-foreground').attr('d', this.describeArc(211, 210.5, 180, 0, wayfinderScore));
   }
 
-  // writeSvgToFile() {
-  //   const outputFile = `./assets/sg-wayfinder-result-${wayfinderScore}.svg`;
-  //   fs.writeFile(outputFile, this.$.html(), function(err) {
-  //     if (err) {
-  //       return console.error(err);
-  //     }
-  //   });
-  // }
-
-  convertToBase64() {
-    console.log('CONVERT');
+  getBase64() {
+    const sourceBuffer = Buffer.from(this.$.html(), 'utf8');
+    return svg2png(sourceBuffer).then(buffer => {
+      return `data:image/png;base64,${buffer.toString('base64')}`;
+    }).catch(e => console.error(e));
   }
 
   polarToCartesian(centerX, centerY, radius, angleInDegrees) {
