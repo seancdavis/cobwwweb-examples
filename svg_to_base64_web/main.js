@@ -43,7 +43,6 @@ function renderBase64Image() {
 
   drawInlineSVG(ctxt, function() {
     var imgSrc = chartCanvas.toDataURL();
-    $('body').append(imgSrc + '<br><br>');
     $('#chart-image').attr('src', imgSrc);
   });
 }

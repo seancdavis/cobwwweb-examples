@@ -1,4 +1,4 @@
-SVG to Base64
+SVG to Base64 (Node)
 ==========
 
 Node script that takes an SVG and returns a base64 PNG string by performing the
