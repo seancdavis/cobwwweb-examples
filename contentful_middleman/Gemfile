@@ -8,3 +8,5 @@ gem 'wdm', '~> 0.1', platforms: [:mswin, :mingw]
 gem 'contentful_middleman'
 
 gem 'middleman-dotenv'
+
+gem 'pry'

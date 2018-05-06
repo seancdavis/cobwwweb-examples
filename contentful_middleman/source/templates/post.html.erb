@@ -2,4 +2,4 @@
 <hr>
 <h1><%= post.title %></h1>
 <p><%= post.published_at.strftime('%b %d, %Y') %></p>
-<%= simple_format current_post.body %>
+<%= simple_format post.body %>

@@ -1,22 +1,39 @@
+require 'lib/page_mapper'
+require 'lib/post_mapper'
+require 'pry'
+
 activate :dotenv
 
 activate :contentful do |f|
   f.space         = { site: ENV['CONTENTFUL_SPACE_ID'] }
   f.access_token  = ENV['CONTENTFUL_ACCESS_TOKEN']
   f.cda_query     = { limit: 1000 }
-  f.content_types = { pages: 'page', posts: 'post' }
+  # f.content_types = { pages: 'page', posts: 'post' }
+  f.content_types = {
+    pages: { mapper: PageMapper, id: 'page' },
+    posts: { mapper: PostMapper, id: 'post' }
+  }
 end
 
-data.site.pages.each do |_id, page|
-  path = "#{page.slug}/index.html"
-  template = "templates/page/#{page.template.parameterize}.html"
-  proxy path, template, locals: { page: page }, ignore: true
+# Ignore all templates (saves from doing it in loop and protects against data not existing)
+ignore 'templates/*.html'
+
+if @app.data.try(:site).try(:pages)
+  data.site.pages.each do |_id, page|
+    next if page.template.blank?
+    # path = "#{page.slug}/index.html"
+    # template = "templates/page/#{page.template.parameterize}.html"
+    proxy page.file_path, page.template, locals: { page: page }
+  end
 end
 
-data.site.posts.each do |_id, post|
-  date = post.published_at
-  path = "#{date.year}-#{'%02i' % date.month}-#{'%02i' % date.day}-#{post.slug}/index.html"
-  proxy path, "templates/post.html", locals: { post: post }, ignore: true
+if @app.data.try(:site).try(:posts)
+  data.site.posts.each do |_id, post|
+    next if post.template.blank?
+    # date = post.published_at
+    # path = "blog/#{date.year}-#{'%02i' % date.month}-#{'%02i' % date.day}-#{post.slug}/index.html"
+    proxy post.file_path, post.template, locals: { post: post }
+  end
 end
 
 # Activate and configure extensions
