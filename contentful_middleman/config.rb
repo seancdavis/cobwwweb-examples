@@ -1,6 +1,8 @@
+activate :dotenv
+
 activate :contentful do |f|
-  f.space         = { site: 't1ihz9vibsvy' }
-  f.access_token  = '0399320a95353fd8487aa478219274f65bf6d3c55c8bd58be876bb54b569bc88'
+  f.space         = { site: ENV['CONTENTFUL_SPACE_ID'] }
+  f.access_token  = ENV['CONTENTFUL_ACCESS_TOKEN']
   f.cda_query     = { limit: 1000 }
   f.content_types = { pages: 'page', posts: 'post' }
 end

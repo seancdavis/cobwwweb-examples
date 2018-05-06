@@ -93,6 +93,9 @@ GEM
       servolux
       tilt (~> 2.0)
       uglifier (~> 3.0)
+    middleman-dotenv (2.0.0)
+      dotenv (>= 2.0)
+      middleman-core (>= 4.0)
     minitest (5.11.3)
     multi_json (1.13.1)
     padrino-helpers (0.13.3.4)
@@ -128,6 +131,7 @@ DEPENDENCIES
   contentful_middleman
   middleman (~> 4.2)
   middleman-autoprefixer (~> 2.7)
+  middleman-dotenv
   tzinfo-data
   wdm (~> 0.1)
 
