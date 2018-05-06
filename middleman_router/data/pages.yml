@@ -1,0 +1,10 @@
+- id: 1
+  title: Hello World
+  slug: hello-world
+  template: home
+  body: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ante neque, lobortis et dictum imperdiet, posuere sed tortor. Curabitur diam mauris, ullamcorper vel blandit vitae, egestas eu ex.</p>
+- id: 2
+  title: Goodbye, Cruel World
+  slug: goodbye-cruel-world
+  template: about
+  body: <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tincidunt nulla vel pulvinar convallis. Cras aliquet maximus massa, non blandit elit auctor a. Nam varius non dui ac posuere. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>

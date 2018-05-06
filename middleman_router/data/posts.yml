@@ -1,0 +1,4 @@
+- id: 1
+  title: My First Post
+  path: my-first-post
+  body: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ante neque, lobortis et dictum imperdiet, posuere sed tortor. Curabitur diam mauris, ullamcorper vel blandit vitae, egestas eu ex.</p>
