@@ -1,3 +1,22 @@
+activate :contentful do |f|
+  f.space         = { site: 't1ihz9vibsvy' }
+  f.access_token  = '0399320a95353fd8487aa478219274f65bf6d3c55c8bd58be876bb54b569bc88'
+  f.cda_query     = { limit: 1000 }
+  f.content_types = { pages: 'page', posts: 'post' }
+end
+
+data.site.pages.each do |_id, page|
+  path = "#{page.slug}/index.html"
+  template = "templates/page/#{page.template.parameterize}.html"
+  proxy path, template, locals: { page: page }, ignore: true
+end
+
+data.site.posts.each do |_id, post|
+  date = post.published_at
+  path = "#{date.year}-#{'%02i' % date.month}-#{'%02i' % date.day}-#{post.slug}/index.html"
+  proxy path, "templates/post.html", locals: { post: post }, ignore: true
+end
+
 # Activate and configure extensions
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
 
