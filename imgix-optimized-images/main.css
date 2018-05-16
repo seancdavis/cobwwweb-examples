@@ -13,21 +13,3 @@ h2 {
   margin: 1rem;
   width: 20rem;
 }
-
-/* --- Optimizer --- */
-
-.img-optimizer-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.img-optimizer-wrapper .img-optimizer-tmp-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  z-index: -1;
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
-}
