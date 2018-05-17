@@ -6,6 +6,11 @@ h2 {
   text-align: center;
 }
 
+.container {
+  padding: 1rem;
+  position: relative;
+}
+
 .inline-block-img {
   display: inline-block;
   margin: 1rem;
