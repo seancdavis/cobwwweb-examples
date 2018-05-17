@@ -23,3 +23,15 @@ h2 {
   object-position: center;
   width: 100%;
 }
+
+.bg-img {
+  height: 20rem;
+  background-position: center;
+  background-size: cover;
+  padding: 1rem;
+}
+
+.bg-img * {
+  text-align: center;
+  color: #fff;
+}
