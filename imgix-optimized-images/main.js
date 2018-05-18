@@ -22,8 +22,8 @@ CRDS.ImageOptimizer.prototype.renderTmpImg = function() {
   // Set the CSS of the temp element to sit right behind the pixellated image.
   this.tmpImg.css({
     position: 'absolute',
-    top: this.img.offset().top - parseInt(this.img.css('margin-top')),
-    left: this.img.offset().left - parseInt(this.img.css('margin-left')),
+    top: this.img.position().top,
+    left: this.img.position().left,
     width: this.img.width(),
     height: this.img.height(),
     zIndex: '-1'
@@ -40,7 +40,7 @@ CRDS.ImageOptimizer.prototype.renderTmpImg = function() {
   this.tmpImg.removeAttr('data-optimize-img');
 
   // Add temp image to the DOM.
-  $('body').prepend(this.tmpImg);
+  this.tmpImg.insertBefore(this.img);
 
   // Once the image is loaded, start the transition. This is the critical piece.
   // imgix.js uses the ix-src attribute to build out the srcset attribute. Then,
@@ -56,11 +56,9 @@ CRDS.ImageOptimizer.prototype.transitionImg = function() {
   // Fade placeholder image out.
   this.img.fadeTo(this.timeToFade, 0);
 
-  // Wait to fully transition until the fade is complete, then put the temp
-  // image next to the original image, remove its absolute positioning and then
-  // remove the image.
+  // Wait to fully transition until the fade is complete, then remove the temp
+  // image's custom styles and remove the original image from the DOM.
   setTimeout($.proxy(function() {
-    this.tmpImg.insertBefore(this.img);
     this.tmpImg.removeAttr('style');
     this.img.remove();
     this.img = undefined;
@@ -93,13 +91,13 @@ CRDS.BgImageOptimizer.prototype.renderTmpImg = function() {
   this.tmpPlacholderBgEl.html('');
   this.tmpPlacholderBgEl.css({
     position: 'absolute',
-    top: this.bgEl.offset().top - parseInt(this.bgEl.css('margin-top')),
-    left: this.bgEl.offset().left - parseInt(this.bgEl.css('margin-left')),
+    top: this.bgEl.position().top,
+    left: this.bgEl.position().left,
     width: this.bgEl.width(),
     height: this.bgEl.height(),
     zIndex: '-1'
   });
-  $('body').prepend(this.tmpPlacholderBgEl);
+  this.tmpPlacholderBgEl.insertBefore(this.bgEl);
 
   // Remove the background image from the main primary element. The user won't
   // notice this transition because the temp duplicate image is already set and
@@ -117,7 +115,7 @@ CRDS.BgImageOptimizer.prototype.renderTmpImg = function() {
     backgroundImage: 'url("' + newUrl + '")',
     zIndex: '-2'
   });
-  $('body').prepend(this.tmpFullSizeBgEl);
+  this.tmpFullSizeBgEl.insertBefore(this.tmpPlacholderBgEl);
 
   // Load the full-size image in memory, and when its loaded kick off the
   // transition.
