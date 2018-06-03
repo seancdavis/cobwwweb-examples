@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Images Loaded</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+
+  <style>
+    img {
+      display: inline-block;
+      height: 200px;
+      object-fit: cover;
+      object-position: center;
+      width: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <img src="//images.unsplash.com/photo-1513106871424-b9e641f9d60f?auto=compress,format&w=1236&h=924&fit=crop">
+  <img src="//images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=compress,format&w=1236&h=924&fit=crop">
+  <img src="//images.unsplash.com/photo-1513754537542-f85cde07305a?auto=compress,format&w=1236&h=924&fit=crop">
+  <img src="//images.unsplash.com/photo-1510824218127-e1d447abda39?auto=compress,format&w=1236&h=924&fit=crop">
+  <img src="//images.unsplash.com/photo-1525514141732-08da15eef5ef?auto=compress,format&w=1236&h=924&fit=crop">
+  <img src="//images.unsplash.com/photo-1509118988680-4c14bd0ff4de?auto=compress,format&w=1236&h=924&fit=crop">
+  <img src="//images.unsplash.com/photo-1491451231005-ec20221dd520?auto=compress,format&w=1236&h=924&fit=crop">
+  <img src="//images.unsplash.com/photo-1503025768915-494859bd53b2?auto=compress,format&w=1236&h=924&fit=crop">
+  <img src="//images.unsplash.com/photo-1499792914147-5e4c9a4a9684?auto=compress,format&w=1236&h=924&fit=crop">
+
+  <img src="//images.unsplash.com/photo-1513106871424-b9e641f9d60f?auto=compress,format&w=2424&h=1818&fit=crop">
+  <img src="//images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=compress,format&w=2424&h=1818&fit=crop">
+  <img src="//images.unsplash.com/photo-1513754537542-f85cde07305a?auto=compress,format&w=2424&h=1818&fit=crop">
+  <img src="//images.unsplash.com/photo-1510824218127-e1d447abda39?auto=compress,format&w=2424&h=1818&fit=crop">
+  <img src="//images.unsplash.com/photo-1525514141732-08da15eef5ef?auto=compress,format&w=2424&h=1818&fit=crop">
+  <img src="//images.unsplash.com/photo-1509118988680-4c14bd0ff4de?auto=compress,format&w=2424&h=1818&fit=crop">
+  <img src="//images.unsplash.com/photo-1491451231005-ec20221dd520?auto=compress,format&w=2424&h=1818&fit=crop">
+  <img src="//images.unsplash.com/photo-1503025768915-494859bd53b2?auto=compress,format&w=2424&h=1818&fit=crop">
+  <img src="//images.unsplash.com/photo-1499792914147-5e4c9a4a9684?auto=compress,format&w=2424&h=1818&fit=crop">
+
+  <img src="//images.unsplash.com/photo-1513106871424-b9e641f9d60f?auto=compress,format&w=3624&h=2418&fit=crop">
+  <img src="//images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=compress,format&w=3624&h=2418&fit=crop">
+  <img src="//images.unsplash.com/photo-1513754537542-f85cde07305a?auto=compress,format&w=3624&h=2418&fit=crop">
+  <img src="//images.unsplash.com/photo-1510824218127-e1d447abda39?auto=compress,format&w=3624&h=2418&fit=crop">
+  <img src="//images.unsplash.com/photo-1525514141732-08da15eef5ef?auto=compress,format&w=3624&h=2418&fit=crop">
+  <img src="//images.unsplash.com/photo-1509118988680-4c14bd0ff4de?auto=compress,format&w=3624&h=2418&fit=crop">
+  <img src="//images.unsplash.com/photo-1491451231005-ec20221dd520?auto=compress,format&w=3624&h=2418&fit=crop">
+  <img src="//images.unsplash.com/photo-1503025768915-494859bd53b2?auto=compress,format&w=3624&h=2418&fit=crop">
+  <img src="//images.unsplash.com/photo-1499792914147-5e4c9a4a9684?auto=compress,format&w=3624&h=2418&fit=crop">
+
+  <script>
+    $(document).ready(function() {
+      setTimeout(function() {
+        var imagesLoaded = 0;
+        var totalImages = $('img').length;
+
+        $('img').each(function(idx, img) {
+          $('<img>').on('load', imageLoaded).attr('src', $(img).attr('src'));
+        });
+
+        function imageLoaded() {
+          imagesLoaded++;
+          if (imagesLoaded == totalImages) {
+            allImagesLoaded();
+          }
+        }
+
+        function allImagesLoaded() {
+          console.log('ALL IMAGES LOADED');
+        }
+      }, 2000);
+    });
+  </script>
+
+</body>
+
+</html>
