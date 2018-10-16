@@ -1,4 +1,4 @@
-export class World {
+class World {
 
   constructor(message) {
     this.message = message;

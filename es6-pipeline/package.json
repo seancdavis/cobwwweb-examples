@@ -3,7 +3,7 @@
     "clean": "rimraf ./.tmp/dist",
     "build:clean": "npm run clean && npm run build",
     "dev": "rollup -c -w",
-    "build": "rollup -c"
+    "build": "gulp js"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -11,6 +11,7 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^8.0.0",
     "gulp-concat": "^2.6.1",
-    "gulp-uglify": "^3.0.1",
+    "gulp-plumber": "^1.2.0",
+    "gulp-uglify": "^3.0.1"
   }
 }
