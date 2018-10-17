@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "clean": "rimraf ./.tmp/dist",
+    "clean": "rimraf ./tmp/javascripts",
     "build:clean": "npm run clean && npm run build",
-    "dev": "rollup -c -w",
+    "dev": "gulp watch-js",
     "build": "gulp js"
   },
   "devDependencies": {
@@ -12,6 +12,8 @@
     "gulp-babel": "^8.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-plumber": "^1.2.0",
-    "gulp-uglify": "^3.0.1"
+    "gulp-uglify": "^3.0.1",
+    "lodash": "^4.17.11",
+    "rimraf": "^2.6.2"
   }
 }

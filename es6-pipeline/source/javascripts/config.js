@@ -2,11 +2,12 @@ module.exports = [
   {
     name: 'application',
     dependencies: [
-      // 'vendor/jquery-3.3.1.min.js',
+      'vendor/jquery',
+      '~lodash/lodash'
     ],
     files: [
-      'components/hello.js',
-      'components/world.js'
+      'components/hello',
+      'components/world'
     ]
   }
 ]

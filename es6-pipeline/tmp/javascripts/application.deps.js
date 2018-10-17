@@ -28114,5 +28114,3 @@ return jQuery;
     root._ = _;
   }
 }.call(this));
-
-function _classCallCheck(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}function _defineProperties(e,n){for(var t=0;t<n.length;t++){var a=n[t];a.enumerable=a.enumerable||!1,a.configurable=!0,"value"in a&&(a.writable=!0),Object.defineProperty(e,a.key,a)}}function _createClass(e,n,t){return n&&_defineProperties(e.prototype,n),t&&_defineProperties(e,t),e}var Hello=function(){function n(e){_classCallCheck(this,n),this.message=e}return _createClass(n,[{key:"talk",value:function(){console.log(this.message)}}]),n}(),World=function(){function n(e){_classCallCheck(this,n),this.message=e}return _createClass(n,[{key:"talk",value:function(){console.log(this.message)}}]),n}();
