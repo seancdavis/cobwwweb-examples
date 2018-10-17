@@ -1,6 +1,5 @@
-module.exports = [
-  {
-    name: 'application',
+module.exports = {
+  'application': {
     dependencies: [
       'vendor/jquery',
       '~lodash/lodash'
@@ -10,10 +9,9 @@ module.exports = [
       'components/world'
     ]
   },
-  {
-    name: 'blog',
+  'blog': {
     files: [
       'components/hello'
     ]
   }
-]
+}

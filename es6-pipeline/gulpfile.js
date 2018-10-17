@@ -11,8 +11,11 @@ const destDir = './tmp/javascripts';
 
 let jsTasks = [];
 
-for (config of jsConfig) {
-  const taskName = `${config.name}-js`;
+for (key in jsConfig) {
+  const name = key;
+  const config = jsConfig[key];
+
+  const taskName = `${name}-js`;
   jsTasks.push(taskName);
 
   gulp.task(`${taskName}-deps`, [], function() {
@@ -25,15 +28,15 @@ for (config of jsConfig) {
 
     return gulp.src(files)
       .pipe(plumber())
-      .pipe(concat(`${config.name}.deps.js`))
+      .pipe(concat(`${name}.deps.js`))
       .pipe(gulp.dest(destDir))
   });
 
-  gulp.task(`${taskName}-files`, [`${taskName}-deps`], function() {
+  gulp.task(`${taskName}-files`, function() {
     const files = config.files.map(f => `${srcDir}/${f}.js`);
     return gulp.src(files)
       .pipe(plumber())
-      .pipe(concat(`${config.name}.files.js`))
+      .pipe(concat(`${name}.files.js`))
       .pipe(babel({
         presets: [
           ['@babel/env', {
@@ -45,18 +48,23 @@ for (config of jsConfig) {
       .pipe(gulp.dest(destDir))
   });
 
-  gulp.task(taskName, [`${taskName}-files`], function() {
+  gulp.task(taskName, [`${taskName}-deps`, `${taskName}-files`], function() {
     return gulp.src([
-        `${destDir}/${config.name}.deps.js`,
-        `${destDir}/${config.name}.files.js`
+        `${destDir}/${name}.deps.js`,
+        `${destDir}/${name}.files.js`
       ])
-      .pipe(concat(`${config.name}.js`))
+      .pipe(plumber())
+      .pipe(concat(`${name}.js`))
       .pipe(gulp.dest(destDir))
   });
 }
 
-gulp.task('js', jsTasks, () => { return });
+gulp.task('js', jsTasks, () => {
+  return
+});
 
 gulp.task('watch-js', function() {
-  gulp.watch(`${srcDir}/**/*.js`, ['js'], () => { return });
+  gulp.watch(`${srcDir}/**/*.js`, ['js'], () => {
+    return
+  });
 });

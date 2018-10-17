@@ -15,7 +15,7 @@ if build? || server?
   )
 end
 
-ignore /(.*)\.(deps|files)\.js/
+ignore /(deps|files|config)\.js/
 ignore /javascripts\/(components|vendor)\/(.*)\.js/
 
 # Layouts
