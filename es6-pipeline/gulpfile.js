@@ -6,6 +6,8 @@ const plumber = require('gulp-plumber');
 const uglify = require('gulp-uglify');
 
 const jsConfig = require('./source/javascripts/config');
+const srcDir = './source/javascripts';
+const destDir = './tmp/javascripts';
 
 let jsTasks = [];
 
@@ -17,21 +19,18 @@ for (config of jsConfig) {
     if (!config.dependencies) return true;
 
     const files = config.dependencies.map(f => {
-      if (f[0] == '~') {
-        return `${f.replace('~', './node_modules/')}.js`
-      } else {
-        return `./source/javascripts/${f}.js`
-      }
+      if (f[0] == '~') return `${f.replace('~', './node_modules/')}.js`
+      return `${srcDir}/${f}.js`
     });
 
     return gulp.src(files)
       .pipe(plumber())
       .pipe(concat(`${config.name}.deps.js`))
-      .pipe(gulp.dest('./tmp/javascripts'))
+      .pipe(gulp.dest(destDir))
   });
 
   gulp.task(`${taskName}-files`, [`${taskName}-deps`], function() {
-    const files = config.files.map(f => `./source/javascripts/${f}.js`);
+    const files = config.files.map(f => `${srcDir}/${f}.js`);
     return gulp.src(files)
       .pipe(plumber())
       .pipe(concat(`${config.name}.files.js`))
@@ -43,21 +42,21 @@ for (config of jsConfig) {
         ]
       }))
       .pipe(uglify())
-      .pipe(gulp.dest('./tmp/javascripts'))
+      .pipe(gulp.dest(destDir))
   });
 
   gulp.task(taskName, [`${taskName}-files`], function() {
     return gulp.src([
-        `./tmp/javascripts/${config.name}.deps.js`,
-        `./tmp/javascripts/${config.name}.files.js`
+        `${destDir}/${config.name}.deps.js`,
+        `${destDir}/${config.name}.files.js`
       ])
       .pipe(concat(`${config.name}.js`))
-      .pipe(gulp.dest('./tmp/javascripts'))
+      .pipe(gulp.dest(destDir))
   });
 }
 
 gulp.task('js', jsTasks, () => { return });
 
 gulp.task('watch-js', function() {
-  gulp.watch('./source/javascripts/**/*.js', ['js'], () => { return });
+  gulp.watch(`${srcDir}/**/*.js`, ['js'], () => { return });
 });

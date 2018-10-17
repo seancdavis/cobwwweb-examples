@@ -9,5 +9,11 @@ module.exports = [
       'components/hello',
       'components/world'
     ]
+  },
+  {
+    name: 'blog',
+    files: [
+      'components/hello'
+    ]
   }
 ]

@@ -15,6 +15,9 @@ if build? || server?
   )
 end
 
+ignore /(.*)\.(deps|files)\.js/
+ignore /javascripts\/(components|vendor)\/(.*)\.js/
+
 # Layouts
 # https://middlemanapp.com/basics/layouts/
 
