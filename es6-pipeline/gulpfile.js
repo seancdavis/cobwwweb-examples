@@ -27,7 +27,6 @@ for (config of jsConfig) {
     return gulp.src(files)
       .pipe(plumber())
       .pipe(concat(`${config.name}.deps.js`))
-      //   // .pipe(uglify())
       .pipe(gulp.dest('./tmp/javascripts'))
   });
 
@@ -57,8 +56,8 @@ for (config of jsConfig) {
   });
 }
 
-gulp.task('js', jsTasks, function() {
-  return
-});
+gulp.task('js', jsTasks, () => { return });
 
-// TODO: Add JS watch task
+gulp.task('watch-js', function() {
+  gulp.watch('./source/javascripts/**/*.js', ['js'], () => { return });
+});

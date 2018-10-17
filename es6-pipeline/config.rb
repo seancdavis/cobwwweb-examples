@@ -9,8 +9,8 @@ if build? || server?
   activate(
     :external_pipeline,
     name: :gulp,
-    command: 'npm run build:clean',
-    # command: build? ? 'npm run build:clean' : 'npm run dev',
+    # command: 'npm run build:clean',
+    command: build? ? 'npm run build:clean' : 'npm run dev',
     source: 'tmp',
     latency: 1
   )
