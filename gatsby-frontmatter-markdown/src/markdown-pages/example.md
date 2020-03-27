@@ -1,6 +1,6 @@
 ---
 title: Hello World
-sidebar: |-
+sidebar_md: |-
   ## This is my sidebar content ...
 
   - And it
