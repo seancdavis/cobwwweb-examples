@@ -1,7 +1,16 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
+const remark = require("remark")
+const remarkHTML = require("remark-html")
 
-// You can delete this file if you're not using it
+// Use remark to convert markdown to HTML and return HTML as a string.
+const processMarkdown = markdown =>
+  remark()
+    .use(remarkHTML)
+    .processSync(markdown)
+    .toString()
+
+exports.onCreateNode = ({ node }) => {
+  // Move onto the next node unless this node has a sidebar.
+  if (!node.frontmatter || !node.frontmatter.sidebar) return
+  // Overwrite the frontmatter.sidebar property as the HTML string.
+  node.frontmatter.sidebar = processMarkdown(node.frontmatter.sidebar)
+}
