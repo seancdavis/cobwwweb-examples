@@ -1,3 +1,4 @@
+const dig = require("object-dig")
 const remark = require("remark")
 const remarkHTML = require("remark-html")
 
@@ -10,7 +11,7 @@ const processMarkdown = markdown =>
 
 exports.onCreateNode = ({ node }) => {
   // Move onto the next node unless this node has a sidebar.
-  if (!node.frontmatter || !node.frontmatter.sidebar) return
+  if (!dig(node, "frontmatter", "sidebar")) return
   // Overwrite the frontmatter.sidebar property as the HTML string.
   node.frontmatter.sidebar = processMarkdown(node.frontmatter.sidebar)
 }
