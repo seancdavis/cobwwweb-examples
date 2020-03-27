@@ -1,10 +1,13 @@
 ---
 title: Hello World
-sidebar_md: |-
-  ## This is my sidebar content ...
-
-  - And it
-  - has bullets!
+sidebar:
+  heading: This is my sidebar content ...
+  bullets:
+    - body_md: And it
+    - body_md: has bullets!
+features:
+  cost: Lorem ipsum ...
+  scale_md: Lorem ipsum ...
 ---
 
 This is the body of the article ...
