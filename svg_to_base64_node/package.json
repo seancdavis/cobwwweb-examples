@@ -2,6 +2,8 @@
   "devDependencies": {
     "axios": "^0.18.1",
     "cheerio": "^1.0.0-rc.2",
+    "cryptiles": ">=4.1.2",
+    "minimist": ">=1.2.2",
     "svg2png": "^4.1.1"
   }
 }
