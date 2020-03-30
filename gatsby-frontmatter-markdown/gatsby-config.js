@@ -21,6 +21,7 @@ module.exports = {
       },
     },
     `gatsby-transformer-remark`,
+    `gatsby-remark-frontmatter-markdown`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
