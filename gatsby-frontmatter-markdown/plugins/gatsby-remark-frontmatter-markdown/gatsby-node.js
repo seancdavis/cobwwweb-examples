@@ -11,17 +11,17 @@ const processMarkdown = markdown =>
     .processSync(markdown)
     .toString()
 
-exports.onCreateNode = ({ node }) => {
+exports.onCreateNode = ({ node }, { suffix = "_md" }) => {
   // Only run if the node is of "MarkdownRemark" type.
   if (dig(node, "internal", "type") === "MarkdownRemark") {
     // Loop through all properties at every level.
     deepForEach(node, (value, key, _, keyPath) => {
       // Move to the next propert unless the key for this property ends with
-      // "_md" and the value is a string.
-      if (lodash.endsWith(key, "_md") && value && typeof value === "string") {
-        // Trim "_md" off the end of the key so we can store the converted HTML
+      // the suffix and the value is a string.
+      if (lodash.endsWith(key, suffix) && value && typeof value === "string") {
+        // Trim suffix off the end of the key so we can store the converted HTML
         // as a separate property.
-        const newPath = lodash.trimEnd(keyPath, "_md")
+        const newPath = lodash.trimEnd(keyPath, suffix)
         // Convert markdown to HTML.
         const md = processMarkdown(value)
         // Store the HTML as the new property.
