@@ -1,0 +1,4 @@
+<%= JSON.generate({
+  results: data.earworms.map { |_, data| data },
+  meta: { count: data.earworms.size }
+}) %>

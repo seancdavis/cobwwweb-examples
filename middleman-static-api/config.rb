@@ -13,6 +13,15 @@ page '/*.xml', layout: false
 page '/*.json', layout: false
 page '/*.txt', layout: false
 
+data.earworms.each do |_, worm|
+  proxy(
+    "/earworms/#{worm.id}.json",
+    "/earworms/template.json",
+    locals: { data: worm },
+    ignore: true
+  )
+end
+
 # With alternative layout
 # page '/path/to/file.html', layout: 'other_layout'
 
