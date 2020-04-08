@@ -1,0 +1,5 @@
+# Installed packages
+node_modules/
+
+# Build output
+build/
