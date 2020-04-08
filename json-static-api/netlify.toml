@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/"
+  to = "/earworms.json"
+  status = 302
