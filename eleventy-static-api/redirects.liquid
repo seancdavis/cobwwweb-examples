@@ -1,0 +1,9 @@
+---
+permalink: _redirects
+---
+/ /earworms.json
+/earworms /earworms.json
+{{ "" }}
+{%- for earworm in earworms -%}
+/earworms/{{ earworm.id }} /earworms/{{ earworm.id }}.json
+{% endfor %}

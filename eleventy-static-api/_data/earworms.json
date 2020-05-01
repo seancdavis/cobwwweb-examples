@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "date": "2020-03-29",
+    "title": "Perfect Illusion",
+    "artist": "Lady Gaga",
+    "spotify_url": "https://open.spotify.com/track/56ZrTFkANjeAMiS14njg4E?si=oaaJCMbiTw2NqYK-L7CSEQ"
+  },
+  {
+    "id": "2",
+    "date": "2020-03-30",
+    "title": "Into the Unknown",
+    "artist": "Idina Menzel",
+    "spotify_url": "https://open.spotify.com/track/3Z0oQ8r78OUaHvGPiDBR3W?si=__mISyOgTCy0nzyoumBiUg"
+  },
+  {
+    "id": "3",
+    "date": "2020-03-31",
+    "title": "Wait for It",
+    "artist": "Leslie Odom Jr.",
+    "spotify_url": "https://open.spotify.com/track/7EqpEBPOohgk7NnKvBGFWo?si=eceqQWGATkO1HJ7n-gKOEQ"
+  }
+]
